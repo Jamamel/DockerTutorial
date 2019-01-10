@@ -1,0 +1,21 @@
+# Registry: jamareg
+# Login Server: jamareg.azurecr.io
+# Username: jamareg
+# Password: QkLtDo+J0QaBtJf4b+DUxjbNF/zBkCt7
+# Password2: xZRIpuzFGQYxB0xcXS4m6C8JHJOqJS+c
+# Repository Name: jamastan
+
+# Login to container Registry
+# docker login --username <username> --password <password> <login server>
+docker login --username jamareg --password QkLtDo+J0QaBtJf4b+DUxjbNF/zBkCt7 jamareg.azurecr.io
+
+# Pull test image
+# docker pull microsoft/aci-helloworld
+
+# Re-tag test image
+# docker tag microsoft/aci-helloworld <login server>/<repository name>/aci-helloworld:v1
+docker tag jamastan jamareg.azurecr.io/jamastan/jamastan:0.0.1
+
+# Push image to repository
+# docker push <login server>/<repository name>/aci-helloworld:v1
+docker push jamareg.azurecr.io/jamastan/jamastan:0.0.1

@@ -1,0 +1,5 @@
+az login
+
+# Create docker registry on Azure
+# az group create --name myResourceGroup --location eastus
+az group create --name jamareg --location uksouth

@@ -1,0 +1,33 @@
+az login
+
+# Create Resource Group on Azure
+# az group create --name myResourceGroup --location eastus
+# az group create --name jamaresource1 --location uksouth
+
+# Create a container registry
+# az acr create --resource-group myResourceGroup --name myContainerRegistry007 --sku Basic
+az acr create --resource-group jamareg --name jamareg --sku Basic --location uksouth --admin-enabled true
+
+# Log into ACR instance
+az acr login --name jamareg
+
+# Re-tag image to be pushed.
+# docker tag jamatest jamareg.azurecr.io/jamatest:0.0.1
+docker tag jamatest jamareg.azurecr.io/jamatest
+
+# Login to ACR
+docker login --username jamareg --password DpLMiMdNdNwO818d+PwPZtXbSAtUgiVf jamareg.azurecr.io
+
+# Push to registry.
+docker push jamareg.azurecr.io/jamatest:0.0.1
+
+# Check images on registry
+az acr repository show-tags --name jamareg --repository jamatest:0.0.1 --output table
+
+# run docker from  ACR
+# sudo docker run -d -p 8787:8787 -e PASSWORD=spitfire --name rstudio jamareg.azurecr.io/jamastan:0.0.1
+# docker run -d -p 3838:3838 jamatest
+
+docker pull jamareg.azurecr.io/jamatest
+# re-launch container with updated app.
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock --net jamanet -p 8080:8080 jamashinyserver
